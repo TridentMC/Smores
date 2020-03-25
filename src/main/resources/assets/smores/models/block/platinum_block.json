@@ -1,0 +1,7 @@
+{
+  "parent": "smores:block/block_base",
+  "textures": {
+    "particle": "smores:blocks/precious_block_base",
+    "all": "smores:blocks/precious_block_base"
+  }
+}

@@ -1,0 +1,8 @@
+{    
+  "parent": "smores:block/ore_base",
+  "textures": {
+      "particle": "block/stone",
+      "base": "smores:blocks/metal_ore_base",
+      "overlay": "smores:blocks/metal_ore_overlay"
+  }
+}

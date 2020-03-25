@@ -1,0 +1,89 @@
+package com.tridevmc.smores.init;
+
+import com.tridevmc.smores.color.MaterialItemColorizer;
+import com.tridevmc.smores.item.*;
+import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.MaterialProperties;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryManager;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class HSItems {
+    public static final MaterialItemColorizer ITEM_COLORIZER = new MaterialItemColorizer();
+    public static final Map<BaseMaterial, Item> INGOTS = new HashMap<>();
+    public static final Map<BaseMaterial, Item> GEARS = new HashMap<>();
+    public static final Map<BaseMaterial, Item> DUSTS = new HashMap<>();
+    public static final Map<BaseMaterial, Item> RODS = new HashMap<>();
+    public static final Map<BaseMaterial, Item> PLATES = new HashMap<>();
+    public static final Map<BaseMaterial, Item> NUGGETS = new HashMap<>();
+
+    public static final Item SMORE = new SmoreItem();
+
+    public static void registerItems(final RegistryEvent.Register<Item> evt) {
+        IForgeRegistry<Item> registry = evt.getRegistry();
+
+        IForgeRegistry<BaseMaterial> mats = RegistryManager.ACTIVE.getRegistry(BaseMaterial.class);
+
+        registry.register(SMORE);
+
+        for (BaseMaterial i : mats.getValues()) {
+            MaterialProperties matProp = i.getProperties();
+            if(matProp.getIngotType() != MaterialProperties.IngotType.NONE) {
+                IngotItem ingot = new IngotItem(i);
+                INGOTS.put(i, ingot);
+                registry.register(ingot);
+            }
+            if(matProp.hasGear()) {
+                GearItem gear = new GearItem(i);
+                GEARS.put(i, gear);
+                registry.register(gear);
+            }
+            if(matProp.hasDust()) {
+                DustItem dust = new DustItem(i);
+                DUSTS.put(i, dust);
+                registry.register(dust);
+            }
+            if(matProp.hasRod()) {
+                RodItem rod = new RodItem(i);
+                RODS.put(i, rod);
+                registry.register(rod);
+            }
+            if(matProp.hasPlate()) {
+                PlateItem plate = new PlateItem(i);
+                PLATES.put(i, plate);
+                registry.register(plate);
+            }
+            if(matProp.hasNugget()) {
+                NuggetItem nugget = new NuggetItem(i);
+                NUGGETS.put(i, nugget);
+                registry.register(nugget);
+            }
+        }
+    }
+
+    public static void setupColors(ItemColors colors) {
+        for(Item e : INGOTS.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : GEARS.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : DUSTS.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : RODS.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : PLATES.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : NUGGETS.values()) {
+            colors.register(ITEM_COLORIZER, e);
+        }
+    }
+}
