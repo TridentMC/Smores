@@ -19,6 +19,11 @@ public class OreBlock extends MaterialBlock {
         super(material, "_ore", generateProperties(material.getProperties().getOreType()));
     }
 
+    @Override
+    public int getTintIndexLayer() {
+        return 1;
+    }
+
     private static Block.Properties generateProperties(MaterialProperties.BlockProperties<MaterialProperties.OreType> properties) {
         return Block.Properties.create(Material.ROCK)
                 .sound(SoundType.STONE)

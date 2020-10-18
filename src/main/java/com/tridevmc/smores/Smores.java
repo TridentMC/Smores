@@ -107,6 +107,7 @@ public class Smores
             HSMaterials.registerMaterials(evt);
         }
 
+        @SuppressWarnings({"unchecked", "rawtypes"})
         @SubscribeEvent
         public static void onRegistryCreation(final RegistryEvent.NewRegistry evt) {
             IForgeRegistry<BaseMaterial> mat = new RegistryBuilder()

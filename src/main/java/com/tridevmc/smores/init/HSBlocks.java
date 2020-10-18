@@ -109,7 +109,7 @@ public class HSBlocks {
 
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderLayers() {
-        RenderType mipped = RenderType.func_228641_d_();
+        RenderType mipped = RenderType.getCutoutMipped();
         for(Block e : ORES.values()) {
             RenderTypeLookup.setRenderLayer(e, mipped);
         }

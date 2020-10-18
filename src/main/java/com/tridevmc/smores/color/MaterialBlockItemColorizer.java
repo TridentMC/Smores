@@ -12,7 +12,7 @@ public class MaterialBlockItemColorizer implements IItemColor {
             BlockItem i = ((BlockItem)stack.getItem());
             if(i.getBlock() instanceof MaterialBlock) {
                 MaterialBlock b = ((MaterialBlock)i.getBlock());
-                if(tintIndex == 1) {
+                if(tintIndex == ((MaterialBlock)((BlockItem) stack.getItem()).getBlock()).getTintIndexLayer()) {
                     return b.materialProperties.getColour();
                 } else {
                     return -1;

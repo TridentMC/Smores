@@ -142,7 +142,6 @@ public class HSMaterials {
     public static void registerMaterials(final MaterialRegistrationEvent evt){
         IForgeRegistry<BaseMaterial> registry = evt.registry;
 
-        Smores.LOGGER.info("HEY! Registering materials now");
         registry.registerAll(
                 COPPER,
                 TIN,

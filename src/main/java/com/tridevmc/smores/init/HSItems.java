@@ -1,5 +1,6 @@
 package com.tridevmc.smores.init;
 
+import com.tridevmc.smores.Smores;
 import com.tridevmc.smores.color.MaterialItemColorizer;
 import com.tridevmc.smores.item.*;
 import com.tridevmc.smores.material.BaseMaterial;
@@ -22,7 +23,7 @@ public class HSItems {
     public static final Map<BaseMaterial, Item> PLATES = new HashMap<>();
     public static final Map<BaseMaterial, Item> NUGGETS = new HashMap<>();
 
-    public static final Item SMORE = new SmoreItem();
+    public static final Item SMORE = new SmoreItem().setRegistryName(Smores.MODID, "smore");
 
     public static void registerItems(final RegistryEvent.Register<Item> evt) {
         IForgeRegistry<Item> registry = evt.getRegistry();
