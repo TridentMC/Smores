@@ -26,7 +26,7 @@ displayURL="https://tridevmc.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="smores_logo.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks to Falkreon for the remaining (unused) liquid metal textures." #optional
+credits="Thanks to darkevilmac for continued guidance and assistance." #optional
 # A text field displayed in the mod UI
 authors="CalmBit" #optional
 # The description text for the mod (multi line!) (#mandatory)
