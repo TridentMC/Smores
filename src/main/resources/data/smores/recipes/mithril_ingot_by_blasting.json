@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "smores:mithril_ore"
+  },
+  "result": "smores:mithril_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

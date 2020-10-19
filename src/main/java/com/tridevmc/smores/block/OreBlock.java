@@ -1,21 +1,16 @@
 package com.tridevmc.smores.block;
 
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.DiggingParticle;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 public class OreBlock extends MaterialBlock {
-    public OreBlock(BaseMaterial material) {
+    public OreBlock(Material material) {
         super(material, "_ore", generateProperties(material.getProperties().getOreType()));
     }
 
@@ -25,7 +20,7 @@ public class OreBlock extends MaterialBlock {
     }
 
     private static Block.Properties generateProperties(MaterialProperties.BlockProperties<MaterialProperties.OreType> properties) {
-        return Block.Properties.create(Material.ROCK)
+        return Block.Properties.create(net.minecraft.block.material.Material.ROCK)
                 .sound(SoundType.STONE)
                 .hardnessAndResistance(properties.hardness, properties.resistance)
                 .harvestTool(ToolType.PICKAXE)

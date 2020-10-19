@@ -5,7 +5,7 @@ import com.tridevmc.smores.block.IngotBlock;
 import com.tridevmc.smores.block.OreBlock;
 import com.tridevmc.smores.color.MaterialBlockColorizer;
 import com.tridevmc.smores.color.MaterialBlockItemColorizer;
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
@@ -24,21 +24,21 @@ import net.minecraftforge.registries.RegistryManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HSBlocks {
+public class BlocksInit {
 
     public static final MaterialBlockColorizer BLOCK_COLORIZER = new MaterialBlockColorizer();
     public static final MaterialBlockItemColorizer BLOCK_ITEM_COLORIZER = new MaterialBlockItemColorizer();
-    public static final Map<BaseMaterial, Block> BLOCKS = new HashMap<>();
-    public static final Map<BaseMaterial, Block> ORES = new HashMap<>();
-    public static final Map<BaseMaterial, BlockItem> BLOCK_ITEMS = new HashMap<>();
-    public static final Map<BaseMaterial, BlockItem> ORE_ITEMS = new HashMap<>();
+    public static final Map<Material, Block> BLOCKS = new HashMap<>();
+    public static final Map<Material, Block> ORES = new HashMap<>();
+    public static final Map<Material, BlockItem> BLOCK_ITEMS = new HashMap<>();
+    public static final Map<Material, BlockItem> ORE_ITEMS = new HashMap<>();
 
     public static void registerBlocks(final RegistryEvent.Register<Block> evt) {
         IForgeRegistry<Block> registry = evt.getRegistry();
 
-        IForgeRegistry<BaseMaterial> mats = RegistryManager.ACTIVE.getRegistry(BaseMaterial.class);
+        IForgeRegistry<Material> mats = RegistryManager.ACTIVE.getRegistry(Material.class);
 
-        for (BaseMaterial i : mats.getValues()) {
+        for (Material i : mats.getValues()) {
             registerMaterialBlocks(i, registry);
         }
     }
@@ -46,14 +46,14 @@ public class HSBlocks {
     public static void registerItemBlocks(final RegistryEvent.Register<Item> evt) {
         IForgeRegistry<Item> registry = evt.getRegistry();
 
-        IForgeRegistry<BaseMaterial> mats = RegistryManager.ACTIVE.getRegistry(BaseMaterial.class);
+        IForgeRegistry<Material> mats = RegistryManager.ACTIVE.getRegistry(Material.class);
 
-        for (BaseMaterial i : mats.getValues()) {
+        for (Material i : mats.getValues()) {
             registerMaterialItemBlocks(i, registry);
         }
     }
 
-    private static void registerMaterialBlocks(BaseMaterial mat, IForgeRegistry<Block> registry) {
+    private static void registerMaterialBlocks(Material mat, IForgeRegistry<Block> registry) {
         MaterialProperties matProp = mat.getProperties();
         MaterialProperties.BlockProperties blockType = matProp.getBlockType();
         if (blockType != null) {
@@ -69,7 +69,7 @@ public class HSBlocks {
         }
     }
 
-    private static void registerMaterialItemBlocks(BaseMaterial mat, IForgeRegistry<Item> registry) {
+    private static void registerMaterialItemBlocks(Material mat, IForgeRegistry<Item> registry) {
         if(BLOCKS.containsKey(mat)) {
             Block b = BLOCKS.get(mat);
             ResourceLocation name = b.getRegistryName();

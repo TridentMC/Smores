@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "smores:nitre_block"
+    }
+  ],
+  "result": {
+    "item": "smores:nitre_dust",
+    "count": 9
+  }
+}

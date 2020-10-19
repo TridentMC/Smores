@@ -1,10 +1,10 @@
 package com.tridevmc.smores;
 
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
-import com.tridevmc.smores.init.HSBlocks;
-import com.tridevmc.smores.init.HSItems;
-import com.tridevmc.smores.init.HSMaterials;
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.init.BlocksInit;
+import com.tridevmc.smores.init.ItemsInit;
+import com.tridevmc.smores.init.MaterialsInit;
+import com.tridevmc.smores.material.Material;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -54,7 +54,7 @@ public class Smores
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        HSBlocks.setupRenderLayers();
+        BlocksInit.setupRenderLayers();
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -82,37 +82,37 @@ public class Smores
 
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> evt) {
-            HSBlocks.registerBlocks(evt);
+            BlocksInit.registerBlocks(evt);
         }
 
         @SubscribeEvent
         public static void onItemColorRegistry(final ColorHandlerEvent.Item evt) {
-            HSItems.setupColors(evt.getItemColors());
-            HSBlocks.setupItemBlockColors(evt.getItemColors());
+            ItemsInit.setupColors(evt.getItemColors());
+            BlocksInit.setupItemBlockColors(evt.getItemColors());
         }
 
         @SubscribeEvent
         public static void onBlockColorRegistry(final ColorHandlerEvent.Block evt) {
-            HSBlocks.setupBlockColors(evt.getBlockColors());
+            BlocksInit.setupBlockColors(evt.getBlockColors());
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> evt) {
-            HSItems.registerItems(evt);
-            HSBlocks.registerItemBlocks(evt);
+            ItemsInit.registerItems(evt);
+            BlocksInit.registerItemBlocks(evt);
         }
 
         @SubscribeEvent
         public static void onMaterialRegistry(final MaterialRegistrationEvent evt) {
-            HSMaterials.registerMaterials(evt);
+            MaterialsInit.registerMaterials(evt);
         }
 
         @SuppressWarnings({"unchecked", "rawtypes"})
         @SubscribeEvent
         public static void onRegistryCreation(final RegistryEvent.NewRegistry evt) {
-            IForgeRegistry<BaseMaterial> mat = new RegistryBuilder()
+            IForgeRegistry<Material> mat = new RegistryBuilder()
                     .setName(MATERIAL_REGISTRY_NAME)
-                    .setType(BaseMaterial.class)
+                    .setType(Material.class)
                     .create();
             ModLoader.get().postEvent(new MaterialRegistrationEvent(mat));
             ((ForgeRegistry)mat).freeze();

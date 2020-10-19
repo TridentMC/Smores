@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "smores:peridot_ore"
+  },
+  "result": "smores:peridot_gem",
+  "experience": 1.0,
+  "cookingtime": 100
+}

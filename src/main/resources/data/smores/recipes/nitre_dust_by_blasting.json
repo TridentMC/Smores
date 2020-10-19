@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "smores:nitre_ore"
+  },
+  "result": "smores:nitre_dust",
+  "experience": 0.7,
+  "cookingtime": 100
+}

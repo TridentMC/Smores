@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "smores:silver_ore"
+  },
+  "result": "smores:silver_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "smores:peridot_block"
+    }
+  ],
+  "result": {
+    "item": "smores:peridot_gem",
+    "count": 9
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "smores:uranium_ore"
+  },
+  "result": "smores:uranium_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

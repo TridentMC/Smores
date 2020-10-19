@@ -3,7 +3,7 @@ package com.tridevmc.smores.init;
 import com.tridevmc.smores.Smores;
 import com.tridevmc.smores.color.MaterialItemColorizer;
 import com.tridevmc.smores.item.*;
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
@@ -14,25 +14,25 @@ import net.minecraftforge.registries.RegistryManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HSItems {
+public class ItemsInit {
     public static final MaterialItemColorizer ITEM_COLORIZER = new MaterialItemColorizer();
-    public static final Map<BaseMaterial, Item> INGOTS = new HashMap<>();
-    public static final Map<BaseMaterial, Item> GEARS = new HashMap<>();
-    public static final Map<BaseMaterial, Item> DUSTS = new HashMap<>();
-    public static final Map<BaseMaterial, Item> RODS = new HashMap<>();
-    public static final Map<BaseMaterial, Item> PLATES = new HashMap<>();
-    public static final Map<BaseMaterial, Item> NUGGETS = new HashMap<>();
+    public static final Map<Material, Item> INGOTS = new HashMap<>();
+    public static final Map<Material, Item> GEARS = new HashMap<>();
+    public static final Map<Material, Item> DUSTS = new HashMap<>();
+    public static final Map<Material, Item> RODS = new HashMap<>();
+    public static final Map<Material, Item> PLATES = new HashMap<>();
+    public static final Map<Material, Item> NUGGETS = new HashMap<>();
 
     public static final Item SMORE = new SmoreItem().setRegistryName(Smores.MODID, "smore");
 
     public static void registerItems(final RegistryEvent.Register<Item> evt) {
         IForgeRegistry<Item> registry = evt.getRegistry();
 
-        IForgeRegistry<BaseMaterial> mats = RegistryManager.ACTIVE.getRegistry(BaseMaterial.class);
+        IForgeRegistry<Material> mats = RegistryManager.ACTIVE.getRegistry(Material.class);
 
         registry.register(SMORE);
 
-        for (BaseMaterial i : mats.getValues()) {
+        for (Material i : mats.getValues()) {
             MaterialProperties matProp = i.getProperties();
             if(matProp.getIngotType() != MaterialProperties.IngotType.NONE) {
                 IngotItem ingot = new IngotItem(i);

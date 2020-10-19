@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "smores:invar_block"
+    }
+  ],
+  "result": {
+    "item": "smores:invar_ingot",
+    "count": 9
+  }
+}

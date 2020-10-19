@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "smores:plutonium_ore"
+  },
+  "result": "smores:plutonium_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

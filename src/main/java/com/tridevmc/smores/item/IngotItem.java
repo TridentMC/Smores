@@ -1,14 +1,14 @@
 package com.tridevmc.smores.item;
 
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 
 public class IngotItem extends MaterialItem {
-    public IngotItem(BaseMaterial material) {
+    public IngotItem(Material material) {
         super(material, getSuffix(material));
     }
 
-    public static String getSuffix(BaseMaterial material) {
+    public static String getSuffix(Material material) {
         MaterialProperties props = material.getProperties();
         switch(props.getIngotType()) {
             case INGOT:

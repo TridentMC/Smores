@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "smores:sulfur_ore"
+  },
+  "result": "smores:sulfur_dust",
+  "experience": 0.7,
+  "cookingtime": 200
+}

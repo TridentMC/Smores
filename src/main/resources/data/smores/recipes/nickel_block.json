@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "smores:nickel_ingot"
+    }
+  },
+  "result": {
+    "item": "smores:nickel_block"
+  }
+}

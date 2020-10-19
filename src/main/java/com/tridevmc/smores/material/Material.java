@@ -5,18 +5,18 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
-public class BaseMaterial implements IForgeRegistryEntry<BaseMaterial> {
+public class Material implements IForgeRegistryEntry<Material> {
 
     private ResourceLocation name;
     private MaterialProperties properties;
 
-    public BaseMaterial(ResourceLocation name, MaterialProperties properties) {
+    public Material(ResourceLocation name, MaterialProperties properties) {
         this.name = name;
         this.properties = properties;
     }
 
     @Override
-    public BaseMaterial setRegistryName(ResourceLocation name) {
+    public Material setRegistryName(ResourceLocation name) {
         this.name = name;
         return this;
     }
@@ -28,8 +28,8 @@ public class BaseMaterial implements IForgeRegistryEntry<BaseMaterial> {
     }
 
     @Override
-    public Class<BaseMaterial> getRegistryType() {
-        return BaseMaterial.class;
+    public Class<Material> getRegistryType() {
+        return Material.class;
     }
 
     public MaterialProperties getProperties() {

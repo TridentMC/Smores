@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "smores:aluminum_ore"
+  },
+  "result": "smores:aluminum_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

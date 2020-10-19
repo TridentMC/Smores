@@ -1,9 +1,9 @@
 package com.tridevmc.smores.item;
 
-import com.tridevmc.smores.material.BaseMaterial;
+import com.tridevmc.smores.material.Material;
 
 public class PlateItem extends MaterialItem {
-    public PlateItem(BaseMaterial material) {
+    public PlateItem(Material material) {
         super(material, "_plate");
     }
 }

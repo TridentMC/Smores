@@ -39,12 +39,12 @@ public class MaterialProperties {
             this.blockType = type;
         }
 
-        public BlockProperties hardness(float hardness) {
+        public BlockProperties<T> hardness(float hardness) {
             this.hardness = hardness;
             return this;
         }
 
-        public BlockProperties resistance(float resistance) {
+        public BlockProperties<T> resistance(float resistance) {
             this.resistance = resistance;
             return this;
         }
@@ -69,12 +69,12 @@ public class MaterialProperties {
         this.ingotType = ingotType;
     }
 
-    public MaterialProperties block(BlockProperties properties) {
+    public MaterialProperties block(BlockProperties<BlockType> properties) {
         this.blockType = properties;
         return this;
     }
 
-    public MaterialProperties oreBlock(BlockProperties properties) {
+    public MaterialProperties oreBlock(BlockProperties<OreType> properties) {
         this.oreType = properties;
         return this;
     }
@@ -129,8 +129,8 @@ public class MaterialProperties {
                 .density(density)
                 .meltingPoint(meltingPoint)
                 .colour(colour)
-                .oreBlock(new BlockProperties(oreType).hardness(3.0f).resistance(3.0f))
-                .block(new BlockProperties(type).hardness(5.0f).resistance(6.0f))
+                .oreBlock(new BlockProperties<>(oreType).hardness(3.0f).resistance(3.0f))
+                .block(new BlockProperties<>(type).hardness(5.0f).resistance(6.0f))
                 .generateDust()
                 .generateGear()
                 .generateNugget()
@@ -146,7 +146,6 @@ public class MaterialProperties {
                 .colour(colour)
                 .generateDust()
                 .generateGear()
-                .generateNugget()
                 .generatePlate()
                 .generateFluid()
                 .generateRod();
@@ -157,7 +156,7 @@ public class MaterialProperties {
                 .density(density)
                 .meltingPoint(meltingPoint)
                 .colour(colour)
-                .block(new BlockProperties(BlockType.METAL_UTILITY).hardness(5.0f).resistance(6.0f))
+                .block(new BlockProperties<>(BlockType.METAL_UTILITY).hardness(5.0f).resistance(6.0f))
                 .generateDust()
                 .generateGear()
                 .generateNugget()
@@ -169,16 +168,16 @@ public class MaterialProperties {
     public static MaterialProperties defaultDust(int colour) {
         return new MaterialProperties(MaterialType.DUST, IngotType.NONE)
                 .colour(colour)
-                .oreBlock(new BlockProperties(OreType.DUST).hardness(3.0f).resistance(3.0f))
-                .block(new BlockProperties(BlockType.DUST).hardness(5.0f).resistance(6.0f))
+                .oreBlock(new BlockProperties<>(OreType.DUST).hardness(3.0f).resistance(3.0f))
+                .block(new BlockProperties<>(BlockType.DUST).hardness(5.0f).resistance(6.0f))
                 .generateDust();
     }
 
     public static MaterialProperties defaultGem(int colour) {
         return new MaterialProperties(MaterialType.GEM, IngotType.GEM)
                 .colour(colour)
-                .oreBlock(new BlockProperties(OreType.GEM).hardness(3.0f).resistance(3.0f))
-                .block(new BlockProperties(BlockType.GEM).hardness(5.0f).resistance(6.0f));
+                .oreBlock(new BlockProperties<>(OreType.GEM).hardness(3.0f).resistance(3.0f))
+                .block(new BlockProperties<>(BlockType.GEM).hardness(5.0f).resistance(6.0f));
     }
 
     public boolean hasFluid() {
