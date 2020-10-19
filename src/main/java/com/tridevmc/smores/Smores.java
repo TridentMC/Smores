@@ -2,10 +2,12 @@ package com.tridevmc.smores;
 
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
 import com.tridevmc.smores.init.BlocksInit;
+import com.tridevmc.smores.init.FluidsInit;
 import com.tridevmc.smores.init.ItemsInit;
 import com.tridevmc.smores.init.MaterialsInit;
 import com.tridevmc.smores.material.Material;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -79,6 +81,11 @@ public class Smores
     // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+        public static void onFluidsRegistry(final RegistryEvent.Register<Fluid> evt) {
+            FluidsInit.registerFluids(evt);
+        }
 
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> evt) {

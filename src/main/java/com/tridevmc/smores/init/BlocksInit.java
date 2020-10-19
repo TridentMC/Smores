@@ -2,9 +2,12 @@ package com.tridevmc.smores.init;
 
 import com.tridevmc.smores.Smores;
 import com.tridevmc.smores.block.IngotBlock;
+import com.tridevmc.smores.block.MoltenMetalBlock;
 import com.tridevmc.smores.block.OreBlock;
 import com.tridevmc.smores.color.MaterialBlockColorizer;
 import com.tridevmc.smores.color.MaterialBlockItemColorizer;
+import com.tridevmc.smores.color.MoltenMetalBlockColorizer;
+import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.Block;
@@ -27,9 +30,12 @@ import java.util.Map;
 public class BlocksInit {
 
     public static final MaterialBlockColorizer BLOCK_COLORIZER = new MaterialBlockColorizer();
+    public static final MoltenMetalBlockColorizer MOLTEN_COLORIZER = new MoltenMetalBlockColorizer();
+
     public static final MaterialBlockItemColorizer BLOCK_ITEM_COLORIZER = new MaterialBlockItemColorizer();
     public static final Map<Material, Block> BLOCKS = new HashMap<>();
     public static final Map<Material, Block> ORES = new HashMap<>();
+    public static final Map<Material, Block> MOLTEN = new HashMap<>();
     public static final Map<Material, BlockItem> BLOCK_ITEMS = new HashMap<>();
     public static final Map<Material, BlockItem> ORE_ITEMS = new HashMap<>();
 
@@ -67,6 +73,12 @@ public class BlocksInit {
             ORES.put(mat, b);
             registry.register(b);
         }
+        boolean molten = matProp.hasFluid();
+        if(molten) {
+            Block b = new MoltenMetalBlock(mat, () -> new MoltenMetalFluid.Source(mat));
+            MOLTEN.put(mat, b);
+            registry.register(b);
+        }
     }
 
     private static void registerMaterialItemBlocks(Material mat, IForgeRegistry<Item> registry) {
@@ -95,6 +107,9 @@ public class BlocksInit {
         }
         for(Block e : ORES.values()) {
             blockColors.register(BLOCK_COLORIZER, e);
+        }
+        for(Block e : MOLTEN.values()) {
+            blockColors.register(MOLTEN_COLORIZER, e);
         }
     }
 

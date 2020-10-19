@@ -2,6 +2,7 @@ package com.tridevmc.smores.init;
 
 import com.tridevmc.smores.Smores;
 import com.tridevmc.smores.color.MaterialItemColorizer;
+import com.tridevmc.smores.color.MoltenBucketItemColorizer;
 import com.tridevmc.smores.item.*;
 import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
@@ -16,12 +17,14 @@ import java.util.Map;
 
 public class ItemsInit {
     public static final MaterialItemColorizer ITEM_COLORIZER = new MaterialItemColorizer();
+    public static final MoltenBucketItemColorizer BUCKET_COLORIZER = new MoltenBucketItemColorizer();
     public static final Map<Material, Item> INGOTS = new HashMap<>();
     public static final Map<Material, Item> GEARS = new HashMap<>();
     public static final Map<Material, Item> DUSTS = new HashMap<>();
     public static final Map<Material, Item> RODS = new HashMap<>();
     public static final Map<Material, Item> PLATES = new HashMap<>();
     public static final Map<Material, Item> NUGGETS = new HashMap<>();
+    public static final Map<Material, Item> BUCKETS = new HashMap<>();
 
     public static final Item SMORE = new SmoreItem().setRegistryName(Smores.MODID, "smore");
 
@@ -64,6 +67,11 @@ public class ItemsInit {
                 NUGGETS.put(i, nugget);
                 registry.register(nugget);
             }
+            if(matProp.hasFluid()) {
+                MoltenBucketItem bucket = new MoltenBucketItem(i);
+                BUCKETS.put(i, bucket);
+                registry.register(bucket);
+            }
         }
     }
 
@@ -85,6 +93,9 @@ public class ItemsInit {
         }
         for(Item e : NUGGETS.values()) {
             colors.register(ITEM_COLORIZER, e);
+        }
+        for(Item e : BUCKETS.values()) {
+            colors.register(BUCKET_COLORIZER, e);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.tridevmc.smores.material;
 
 public class MaterialProperties {
-
     public enum MaterialType {
         ELEMENT,
         ALLOY,
@@ -60,6 +59,7 @@ public class MaterialProperties {
     private boolean plate;
     private boolean gear;
     private boolean rod;
+    private boolean molten;
     private int colour = -1;
     private int density = -1;
     private int meltingPoint = -1;
