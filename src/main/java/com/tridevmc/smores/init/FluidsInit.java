@@ -1,15 +1,9 @@
 package com.tridevmc.smores.init;
 
 import com.tridevmc.smores.Smores;
-import com.tridevmc.smores.block.IngotBlock;
-import com.tridevmc.smores.block.MoltenMetalBlock;
-import com.tridevmc.smores.block.OreBlock;
 import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.material.Material;
-import com.tridevmc.smores.material.MaterialProperties;
-import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.DamageSource;
@@ -27,7 +21,6 @@ public class FluidsInit {
 
     public static final ITag.INamedTag<Fluid> MOLTEN_METAL = FluidTags.createOptional(new ResourceLocation(Smores.MODID, "molten_metal"));
     public static final DamageSource MOLTEN_DAMAGE = new DamageSource("molten_metal").setFireDamage();
-
 
     public static void registerFluids(final RegistryEvent.Register<Fluid> evt) {
         IForgeRegistry<Fluid> registry = evt.getRegistry();

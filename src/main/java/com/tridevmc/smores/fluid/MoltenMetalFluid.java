@@ -34,7 +34,6 @@ public abstract class MoltenMetalFluid extends ForgeFlowingFluid {
                 .block(()-> (FlowingFluidBlock) BlocksInit.MOLTEN.get(mat))
                 .bucket(() -> ItemsInit.BUCKETS.get(mat))
                 .explosionResistance(100F)
-                .slopeFindDistance(4)
                 .levelDecreasePerBlock(1);
     }
 
@@ -45,6 +44,16 @@ public abstract class MoltenMetalFluid extends ForgeFlowingFluid {
 
     protected MoltenMetalFluid(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected int getSlopeFindDistance(IWorldReader worldIn) {
+        return worldIn.getDimensionType().isUltrawarm() ? 4 : 2;
+    }
+
+    @Override
+    protected int getLevelDecreasePerBlock(IWorldReader worldIn) {
+        return worldIn.getDimensionType().isUltrawarm() ? 1 : 2;
     }
 
     public static class Flowing extends MoltenMetalFluid

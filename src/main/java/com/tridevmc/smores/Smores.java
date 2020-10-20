@@ -1,5 +1,6 @@
 package com.tridevmc.smores;
 
+import com.tridevmc.smores.client.CommonProxy;
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
 import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.init.BlocksInit;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -41,7 +43,10 @@ public class Smores
     public static final String MODID = "smores";
     public static final ResourceLocation MATERIAL_REGISTRY_NAME = new ResourceLocation(Smores.MODID, "materials");
     public static final SmoresItemGroup SMORES_ITEM_GROUP = new SmoresItemGroup();
+    public static final CommonProxy PROXY = DistExecutor.safeRunForDist(()->com.tridevmc.smores.client.ClientProxy::new, ()->CommonProxy::new);
     public Smores() {
+        MinecraftForge.EVENT_BUS.register(PROXY);
+        FMLJavaModLoadingContext.get().getModEventBus().register(PROXY);
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -61,7 +66,7 @@ public class Smores
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        BlocksInit.setupRenderLayers();
+        PROXY.setupRenderTypes();
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -80,17 +85,6 @@ public class Smores
 
     }
 
-    @SubscribeEvent
-    public void onFogColors(EntityViewRenderEvent.FogColors evt) {
-        Fluid fluid = evt.getInfo().getFluidState().getFluid();
-        if(fluid instanceof MoltenMetalFluid.Source || fluid instanceof MoltenMetalFluid.Flowing) {
-            int color = fluid.getAttributes().getColor();
-            evt.setBlue((float) (color & 0xFF) / 0xFF);
-            evt.setGreen((float) ((color >> 8) & 0xFF) / 0xFF);
-            evt.setRed((float) ((color >> 16) & 0xFF) / 0xFF);
-        }
-    }
-
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -106,16 +100,6 @@ public class Smores
             BlocksInit.registerBlocks(evt);
         }
 
-        @SubscribeEvent
-        public static void onItemColorRegistry(final ColorHandlerEvent.Item evt) {
-            ItemsInit.setupColors(evt.getItemColors());
-            BlocksInit.setupItemBlockColors(evt.getItemColors());
-        }
-
-        @SubscribeEvent
-        public static void onBlockColorRegistry(final ColorHandlerEvent.Block evt) {
-            BlocksInit.setupBlockColors(evt.getBlockColors());
-        }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> evt) {

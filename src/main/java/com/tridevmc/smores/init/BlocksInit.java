@@ -29,10 +29,7 @@ import java.util.Map;
 
 public class BlocksInit {
 
-    public static final MaterialBlockColorizer BLOCK_COLORIZER = new MaterialBlockColorizer();
-    public static final MoltenMetalBlockColorizer MOLTEN_COLORIZER = new MoltenMetalBlockColorizer();
 
-    public static final MaterialBlockItemColorizer BLOCK_ITEM_COLORIZER = new MaterialBlockItemColorizer();
     public static final Map<Material, Block> BLOCKS = new HashMap<>();
     public static final Map<Material, Block> ORES = new HashMap<>();
     public static final Map<Material, Block> MOLTEN = new HashMap<>();
@@ -101,32 +98,8 @@ public class BlocksInit {
         }
     }
 
-    public static void setupBlockColors(BlockColors blockColors) {
-        for(Block e : BLOCKS.values()) {
-            blockColors.register(BLOCK_COLORIZER, e);
-        }
-        for(Block e : ORES.values()) {
-            blockColors.register(BLOCK_COLORIZER, e);
-        }
-        for(Block e : MOLTEN.values()) {
-            blockColors.register(MOLTEN_COLORIZER, e);
-        }
-    }
-
-    public static void setupItemBlockColors(ItemColors itemColors) {
-        for(BlockItem e : BLOCK_ITEMS.values()) {
-            itemColors.register(BLOCK_ITEM_COLORIZER, e);
-        }
-        for(BlockItem e : ORE_ITEMS.values()) {
-            itemColors.register(BLOCK_ITEM_COLORIZER, e);
-        }
-    }
-
     @OnlyIn(Dist.CLIENT)
     public static void setupRenderLayers() {
-        RenderType mipped = RenderType.getCutoutMipped();
-        for(Block e : ORES.values()) {
-            RenderTypeLookup.setRenderLayer(e, mipped);
-        }
+
     }
 }

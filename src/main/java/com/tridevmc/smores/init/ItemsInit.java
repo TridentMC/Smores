@@ -16,8 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemsInit {
-    public static final MaterialItemColorizer ITEM_COLORIZER = new MaterialItemColorizer();
-    public static final MoltenBucketItemColorizer BUCKET_COLORIZER = new MoltenBucketItemColorizer();
+
     public static final Map<Material, Item> INGOTS = new HashMap<>();
     public static final Map<Material, Item> GEARS = new HashMap<>();
     public static final Map<Material, Item> DUSTS = new HashMap<>();
@@ -72,30 +71,6 @@ public class ItemsInit {
                 BUCKETS.put(i, bucket);
                 registry.register(bucket);
             }
-        }
-    }
-
-    public static void setupColors(ItemColors colors) {
-        for(Item e : INGOTS.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : GEARS.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : DUSTS.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : RODS.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : PLATES.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : NUGGETS.values()) {
-            colors.register(ITEM_COLORIZER, e);
-        }
-        for(Item e : BUCKETS.values()) {
-            colors.register(BUCKET_COLORIZER, e);
         }
     }
 }

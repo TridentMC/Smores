@@ -12,7 +12,7 @@ public class MaterialsInit {
             new ResourceLocation(Smores.MODID, "copper"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    8940, 1357, 0xFFFC8E00)
+                        8940, 1357, 0xFFFC8E00)
     );
     public static final Material TIN = new Material(
             new ResourceLocation(Smores.MODID, "tin"),

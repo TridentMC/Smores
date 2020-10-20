@@ -1,10 +1,12 @@
 package com.tridevmc.smores.color;
 
-import com.tridevmc.smores.item.MaterialItem;
 import com.tridevmc.smores.item.MoltenBucketItem;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class MoltenBucketItemColorizer implements IItemColor {
     @Override
     public int getColor(ItemStack stack, int tintIndex) {

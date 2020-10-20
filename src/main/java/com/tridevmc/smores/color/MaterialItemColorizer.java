@@ -3,7 +3,10 @@ package com.tridevmc.smores.color;
 import com.tridevmc.smores.item.MaterialItem;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class MaterialItemColorizer implements IItemColor {
 
     @Override

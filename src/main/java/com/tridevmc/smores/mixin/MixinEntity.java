@@ -1,5 +1,6 @@
 package com.tridevmc.smores.mixin;
 
+import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.init.FluidsInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
@@ -49,8 +50,11 @@ public abstract class MixinEntity {
     @Inject(method = "setOnFireFromLava", at = @At("HEAD"), cancellable = true)
     protected void onSetOnFireFromLava(CallbackInfo ci) {
         if(isInMolten() && !this.isImmuneToFire()) {
+            BlockPos blockpos = new BlockPos(this.getPosX(), this.getPosY(), this.getPosZ());
+            FluidState fluidstate = this.world.getFluidState(blockpos);
+            MoltenMetalFluid f = (MoltenMetalFluid)fluidstate.getFluid();
             this.setFire(15);
-            this.attackEntityFrom(FluidsInit.MOLTEN_DAMAGE, 4.0F);
+            this.attackEntityFrom(FluidsInit.MOLTEN_DAMAGE, f.getAttributes().getTemperature()/325);
             ci.cancel();
         }
     }
