@@ -1,6 +1,7 @@
 package com.tridevmc.smores;
 
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
+import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.init.BlocksInit;
 import com.tridevmc.smores.init.FluidsInit;
 import com.tridevmc.smores.init.ItemsInit;
@@ -8,14 +9,18 @@ import com.tridevmc.smores.init.MaterialsInit;
 import com.tridevmc.smores.material.Material;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -75,7 +80,16 @@ public class Smores
 
     }
 
-
+    @SubscribeEvent
+    public void onFogColors(EntityViewRenderEvent.FogColors evt) {
+        Fluid fluid = evt.getInfo().getFluidState().getFluid();
+        if(fluid instanceof MoltenMetalFluid.Source || fluid instanceof MoltenMetalFluid.Flowing) {
+            int color = fluid.getAttributes().getColor();
+            evt.setBlue((float) (color & 0xFF) / 0xFF);
+            evt.setGreen((float) ((color >> 8) & 0xFF) / 0xFF);
+            evt.setRed((float) ((color >> 16) & 0xFF) / 0xFF);
+        }
+    }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)

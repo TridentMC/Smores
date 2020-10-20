@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.tridevmc.smores.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "refmap": "smores.refmap.json",
+  "mixins": [
+    "MixinEntity"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

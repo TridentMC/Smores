@@ -7,9 +7,12 @@ import com.tridevmc.smores.init.ItemsInit;
 import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.item.BucketItem;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.world.IWorldReader;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
@@ -35,23 +38,53 @@ public abstract class MoltenMetalFluid extends ForgeFlowingFluid {
                 .levelDecreasePerBlock(1);
     }
 
+    @Override
+    public int getTickRate(IWorldReader world) {
+        return world.getDimensionType().isUltrawarm() ? 10 : 30;
+    }
+
     protected MoltenMetalFluid(Properties properties) {
         super(properties);
     }
 
-    public static class Flowing extends ForgeFlowingFluid.Flowing
+    public static class Flowing extends MoltenMetalFluid
     {
         public Flowing(Material mat)
         {
             super(getFluidProperties(mat));
+            setDefaultState(getStateContainer().getBaseState().with(LEVEL_1_8, 7));
+        }
+
+        @Override
+        protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder) {
+            super.fillStateContainer(builder);
+            builder.add(LEVEL_1_8);
+        }
+
+        @Override
+        public boolean isSource(FluidState state) {
+            return false;
+        }
+
+        @Override
+        public int getLevel(FluidState state) {
+            return state.get(LEVEL_1_8);
         }
     }
 
-    public static class Source extends ForgeFlowingFluid.Source
+    public static class Source extends MoltenMetalFluid
     {
         public Source(Material mat)
         {
             super(getFluidProperties(mat));
+        }
+
+        public int getLevel(FluidState state) {
+            return 8;
+        }
+
+        public boolean isSource(FluidState state) {
+            return true;
         }
     }
 }
