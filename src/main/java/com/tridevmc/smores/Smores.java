@@ -1,13 +1,12 @@
 package com.tridevmc.smores;
 
 import com.tridevmc.smores.client.CommonProxy;
+import com.tridevmc.smores.client.FogColorizer;
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
 import com.tridevmc.smores.fluid.MoltenMetalFluid;
-import com.tridevmc.smores.init.BlocksInit;
-import com.tridevmc.smores.init.FluidsInit;
-import com.tridevmc.smores.init.ItemsInit;
-import com.tridevmc.smores.init.MaterialsInit;
+import com.tridevmc.smores.init.*;
 import com.tridevmc.smores.material.Material;
+import com.tridevmc.smores.world.BiomeFixer;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -23,10 +22,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.*;
@@ -45,38 +41,35 @@ public class Smores
     public static final SmoresItemGroup SMORES_ITEM_GROUP = new SmoresItemGroup();
     public static final CommonProxy PROXY = DistExecutor.safeRunForDist(()->com.tridevmc.smores.client.ClientProxy::new, ()->CommonProxy::new);
     public Smores() {
-        MinecraftForge.EVENT_BUS.register(PROXY);
         FMLJavaModLoadingContext.get().getModEventBus().register(PROXY);
-        // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        // Register ourselves for server and other game events we are interested in
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-
+    private void setup(final FMLCommonSetupEvent event) {
+        WorldInit.registerConfiguredFeatures();
+        BiomeFixer.registerFeatureHooks();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         PROXY.setupRenderTypes();
+        MinecraftForge.EVENT_BUS.register(new FogColorizer());
     }
 
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
+    private void enqueueIMC(final InterModEnqueueEvent event) {
 
     }
 
-    private void processIMC(final InterModProcessEvent event)
-    {
+    private void processIMC(final InterModProcessEvent event) {
 
+    }
+
+    private void loadComplete(final FMLLoadCompleteEvent event) {
+        BiomeFixer.insertFeatures();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

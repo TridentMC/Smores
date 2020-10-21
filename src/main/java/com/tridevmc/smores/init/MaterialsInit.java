@@ -12,68 +12,80 @@ public class MaterialsInit {
             new ResourceLocation(Smores.MODID, "copper"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                        8940, 1357, 0xFFFC8E00)
+                        8940, 1357, 0xFFFC8E00,
+                    8, 16, 40, 75)
     );
     public static final Material TIN = new Material(
             new ResourceLocation(Smores.MODID, "tin"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    7280,505, 0xFFb5bee6)
+                    7280,505, 0xFFb5bee6,
+                    8, 16, 20, 55)
     );
     public static final Material LEAD = new Material(
             new ResourceLocation(Smores.MODID, "lead"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    11340, 600, 0xFF55557B)
+                    11340, 600, 0xFF55557B,
+                    6, 10, 5, 30)
     );
     public static final Material SILVER = new Material(
             new ResourceLocation(Smores.MODID, "silver"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_PRECIOUS,
                     MaterialProperties.OreType.PRECIOUS,
-                    10490, 1234, 0xFFd9e9ff)
+                    10490, 1234, 0xFFd9e9ff,
+                    12, 2, 10, 35)
     );
     public static final Material NICKEL = new Material(
             new ResourceLocation(Smores.MODID, "nickel"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    8908, 1728, 0xFFcfc4b2)
+                    8908, 1728, 0xFFcfc4b2,
+                    16, 2, 5, 20)
     );
     public static final Material PLATINUM = new Material(
             new ResourceLocation(Smores.MODID, "platinum"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_PRECIOUS,
                     MaterialProperties.OreType.PRECIOUS,
-                    21400, 2041, 0xFFadd8ff)
+                    21400, 2041, 0xFFadd8ff,
+                    8, 2, 5, 25)
     );
     public static final Material MITHRIL = new Material(
             new ResourceLocation(Smores.MODID, "mithril"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_PRECIOUS,
                     MaterialProperties.OreType.PRECIOUS,
-                    4110, 1941, 0xFFBE94B2)
+                    4110, 1941, 0xFFBE94B2,
+                    8, 2, 5, 25)
     );
+    // TODO: Figure (oregens) ones out better
     public static final Material ZINC = new Material(
             new ResourceLocation(Smores.MODID, "zinc"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    7135, 692, 0xFFC5D098)
+                    7135, 692, 0xFFC5D098,
+                    8, 16, 10, 45)
     );
 
     public static final Material ALUMINUM = new Material(
             new ResourceLocation(Smores.MODID, "aluminum"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    2712, 692, 0xFFebebeb)
+                    2712, 692, 0xFFebebeb,
+                    8, 8, 32, 64)
     );
     public static final Material URANIUM = new Material(
             new ResourceLocation(Smores.MODID, "uranium"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    17300, 1405, 0xFF95FF4F)
+                    17300, 1405, 0xFF95FF4F,
+                    4, 8, 2, 16)
     );
     public static final Material PLUTONIUM = new Material(
             new ResourceLocation(Smores.MODID, "plutonium"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    19816, 913, 0xFF6849DB)
+                    19816, 913, 0xFF6849DB,
+                    4, 2, 2, 10)
     );
     public static final Material IRON = new Material(
             new ResourceLocation(Smores.MODID, "iron"),
@@ -105,24 +117,29 @@ public class MaterialsInit {
     );
     public static final Material RUBY = new Material(
             new ResourceLocation(Smores.MODID, "ruby"),
-            MaterialProperties.defaultGem(0xFFFF1C1C)
+            MaterialProperties.defaultGem(0xFFFF1C1C,
+                    4, 1, 0, 24)
     );
     public static final Material SAPPHIRE = new Material(
             new ResourceLocation(Smores.MODID, "sapphire"),
-            MaterialProperties.defaultGem(0xFF194FFF)
+            MaterialProperties.defaultGem(0xFF194FFF,
+                    4, 1, 0, 24)
     );
     public static final Material PERIDOT = new Material(
             new ResourceLocation(Smores.MODID, "peridot"),
-            MaterialProperties.defaultGem(0xFF5EAE1E)
+            MaterialProperties.defaultGem(0xFF5EAE1E,
+                    4, 1, 0, 24)
     );
 
     public static final Material SULFUR = new Material(
             new ResourceLocation(Smores.MODID, "sulfur"),
-            MaterialProperties.defaultDust(0xFFf5e027)
+            MaterialProperties.defaultDust(0xFFf5e027,
+                    8, 16, 0, 128)
     );
     public static final Material NITRE = new Material(
             new ResourceLocation(Smores.MODID, "nitre"),
-            MaterialProperties.defaultDust(0xFFe8ba23)
+            MaterialProperties.defaultDust(0xFFe8ba23,
+                    8, 16, 0, 128)
     );
     public static final Material MERCURY = new Material(
             new ResourceLocation(Smores.MODID, "mercury"),

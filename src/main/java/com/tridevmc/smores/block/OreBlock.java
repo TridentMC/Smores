@@ -24,7 +24,8 @@ public class OreBlock extends MaterialBlock {
                 .sound(SoundType.STONE)
                 .hardnessAndResistance(properties.hardness, properties.resistance)
                 .harvestTool(ToolType.PICKAXE)
-                .harvestLevel(properties.blockType == MaterialProperties.OreType.DEFAULT ? 1 : 2);
+                .harvestLevel(properties.blockType == MaterialProperties.OreType.DEFAULT ? 1 : 2)
+                .setLightLevel(s -> s.getBlock() instanceof OreBlock ? 15 : 0);
     }
 
     @Override

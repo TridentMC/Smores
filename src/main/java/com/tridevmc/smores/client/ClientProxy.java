@@ -27,17 +27,6 @@ public class ClientProxy extends CommonProxy {
     public static final MaterialBlockItemColorizer BLOCK_ITEM_COLORIZER = new MaterialBlockItemColorizer();
 
     @SubscribeEvent
-    public void onFogColors(EntityViewRenderEvent.FogColors evt) {
-        Fluid fluid = evt.getInfo().getFluidState().getFluid();
-        if(fluid instanceof MoltenMetalFluid.Source || fluid instanceof MoltenMetalFluid.Flowing) {
-            int color = fluid.getAttributes().getColor();
-            evt.setBlue((float) (color & 0xFF) / 0xFF);
-            evt.setGreen((float) ((color >> 8) & 0xFF) / 0xFF);
-            evt.setRed((float) ((color >> 16) & 0xFF) / 0xFF);
-        }
-    }
-
-    @SubscribeEvent
     public void onItemColorRegistry(final ColorHandlerEvent.Item evt) {
         ItemColors colors = evt.getItemColors();
 

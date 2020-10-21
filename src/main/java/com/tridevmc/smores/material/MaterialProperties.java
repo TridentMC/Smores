@@ -29,6 +29,12 @@ public class MaterialProperties {
         GEM
     }
 
+    public enum Dimension {
+        OVERWORLD,
+        NETHER,
+        THE_END
+    }
+
     public static class BlockProperties<T> {
         public T blockType;
         public float hardness;
@@ -49,10 +55,27 @@ public class MaterialProperties {
         }
     }
 
+    public static class OreGenProperties {
+        public int size;
+        public int count;
+        public int minHeight;
+        public int maxHeight;
+        public Dimension dimension;
+
+        public OreGenProperties(int size, int count, int minHeight, int maxHeight, Dimension dimension) {
+            this.size = size;
+            this.count = count;
+            this.minHeight = minHeight;
+            this.maxHeight = maxHeight;
+            this.dimension = dimension;
+        }
+    }
+
     private final MaterialType materialType;
     private final IngotType ingotType;
     private BlockProperties<BlockType> blockType = null;
     private BlockProperties<OreType> oreType = null;
+    private OreGenProperties oreGen = null;
     private boolean fluid;
     private boolean dust;
     private boolean nugget;
@@ -74,8 +97,9 @@ public class MaterialProperties {
         return this;
     }
 
-    public MaterialProperties oreBlock(BlockProperties<OreType> properties) {
+    public MaterialProperties oreBlock(BlockProperties<OreType> properties, OreGenProperties oreGen) {
         this.oreType = properties;
+        this.oreGen = oreGen;
         return this;
     }
 
@@ -124,12 +148,20 @@ public class MaterialProperties {
         return this;
     }
 
-    public static MaterialProperties defaultElementalMetal(BlockType type, OreType oreType, int density, int meltingPoint, int colour) {
+    public static MaterialProperties defaultElementalMetal(BlockType type,
+                                                           OreType oreType,
+                                                           int density,
+                                                           int meltingPoint,
+                                                           int colour,
+                                                           int size,
+                                                           int count,
+                                                           int minHeight,
+                                                           int maxHeight) {
         return new MaterialProperties(MaterialType.ELEMENT, IngotType.INGOT)
                 .density(density)
                 .meltingPoint(meltingPoint)
                 .colour(colour)
-                .oreBlock(new BlockProperties<>(oreType).hardness(3.0f).resistance(3.0f))
+                .oreBlock(new BlockProperties<>(oreType).hardness(3.0f).resistance(3.0f), new OreGenProperties(size, count, minHeight, maxHeight, Dimension.OVERWORLD))
                 .block(new BlockProperties<>(type).hardness(5.0f).resistance(6.0f))
                 .generateDust()
                 .generateGear()
@@ -165,18 +197,26 @@ public class MaterialProperties {
                 .generateRod();
     }
 
-    public static MaterialProperties defaultDust(int colour) {
+    public static MaterialProperties defaultDust(int colour,
+                                                 int size,
+                                                 int count,
+                                                 int minHeight,
+                                                 int maxHeight) {
         return new MaterialProperties(MaterialType.DUST, IngotType.NONE)
                 .colour(colour)
-                .oreBlock(new BlockProperties<>(OreType.DUST).hardness(3.0f).resistance(3.0f))
+                .oreBlock(new BlockProperties<>(OreType.DUST).hardness(3.0f).resistance(3.0f), new OreGenProperties(size, count, minHeight, maxHeight, Dimension.NETHER))
                 .block(new BlockProperties<>(BlockType.DUST).hardness(5.0f).resistance(6.0f))
                 .generateDust();
     }
 
-    public static MaterialProperties defaultGem(int colour) {
+    public static MaterialProperties defaultGem(int colour,
+                                                int size,
+                                                int count,
+                                                int minHeight,
+                                                int maxHeight) {
         return new MaterialProperties(MaterialType.GEM, IngotType.GEM)
                 .colour(colour)
-                .oreBlock(new BlockProperties<>(OreType.GEM).hardness(3.0f).resistance(3.0f))
+                .oreBlock(new BlockProperties<>(OreType.GEM).hardness(3.0f).resistance(3.0f), new OreGenProperties(size, count, minHeight, maxHeight, Dimension.OVERWORLD))
                 .block(new BlockProperties<>(BlockType.GEM).hardness(5.0f).resistance(6.0f));
     }
 
@@ -223,6 +263,8 @@ public class MaterialProperties {
     public BlockProperties<BlockType> getBlockType() {
         return blockType;
     }
+
+    public OreGenProperties getOreGen() {return oreGen;}
 
     public IngotType getIngotType() {
         return ingotType;
