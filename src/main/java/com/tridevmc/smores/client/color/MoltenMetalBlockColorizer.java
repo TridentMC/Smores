@@ -1,6 +1,6 @@
-package com.tridevmc.smores.color;
+package com.tridevmc.smores.client.color;
 
-import com.tridevmc.smores.block.MaterialBlock;
+import com.tridevmc.smores.block.MoltenMetalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -12,13 +12,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
-public class MaterialBlockColorizer implements IBlockColor {
+public class MoltenMetalBlockColorizer implements IBlockColor {
     @Override
     public int getColor(BlockState state, @Nullable IBlockDisplayReader light, @Nullable BlockPos pos, int tintIndex) {
         Block block = state.getBlock();
-        if (block instanceof MaterialBlock) {
-            MaterialBlock mat = (MaterialBlock) block;
-            if(tintIndex == mat.getTintIndexLayer()) {
+        if (block instanceof MoltenMetalBlock) {
+            MoltenMetalBlock mat = (MoltenMetalBlock) block;
+            if (tintIndex == 0) {
                 return mat.materialProperties.getColour();
             }
         }

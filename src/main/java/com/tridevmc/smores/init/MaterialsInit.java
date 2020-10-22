@@ -12,14 +12,14 @@ public class MaterialsInit {
             new ResourceLocation(Smores.MODID, "copper"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                        8940, 1357, 0xFFFC8E00,
+                    8940, 1357, 0xFFFC8E00,
                     8, 16, 40, 75)
     );
     public static final Material TIN = new Material(
             new ResourceLocation(Smores.MODID, "tin"),
             MaterialProperties.defaultElementalMetal(MaterialProperties.BlockType.METAL_UTILITY,
                     MaterialProperties.OreType.DEFAULT,
-                    7280,505, 0xFFb5bee6,
+                    7280, 505, 0xFFb5bee6,
                     8, 16, 20, 55)
     );
     public static final Material LEAD = new Material(
@@ -144,16 +144,16 @@ public class MaterialsInit {
     public static final Material MERCURY = new Material(
             new ResourceLocation(Smores.MODID, "mercury"),
             new MaterialProperties(MaterialProperties.MaterialType.ELEMENT, MaterialProperties.IngotType.GLOB)
-                .colour(0xFFc9c9c9)
+                    .colour(0xFFc9c9c9)
     );
     public static final Material LAPIS = new Material(
             new ResourceLocation(Smores.MODID, "lapis"),
             new MaterialProperties(MaterialProperties.MaterialType.DUST, MaterialProperties.IngotType.NONE)
-                .colour(0xFF3030EF)
-                .generateDust()
+                    .colour(0xFF3030EF)
+                    .generateDust()
     );
 
-    public static void registerMaterials(final MaterialRegistrationEvent evt){
+    public static void registerMaterials(final MaterialRegistrationEvent evt) {
         IForgeRegistry<Material> registry = evt.registry;
 
         registry.registerAll(

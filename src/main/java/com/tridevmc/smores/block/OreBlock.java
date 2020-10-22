@@ -24,18 +24,13 @@ public class OreBlock extends MaterialBlock {
                 .sound(SoundType.STONE)
                 .hardnessAndResistance(properties.hardness, properties.resistance)
                 .harvestTool(ToolType.PICKAXE)
-                .harvestLevel(properties.blockType == MaterialProperties.OreType.DEFAULT ? 1 : 2)
-                .setLightLevel(s -> s.getBlock() instanceof OreBlock ? 15 : 0);
+                .harvestLevel(properties.blockType.getToolLevel());
     }
 
     @Override
     public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
-        if(this.materialProperties.getOreType() != null) {
-            int exp =
-                    this.materialProperties.getOreType().blockType == MaterialProperties.OreType.DUST ?
-                        MathHelper.nextInt(RANDOM, 2, 5) :
-                    this.materialProperties.getOreType().blockType == MaterialProperties.OreType.GEM ?
-                        MathHelper.nextInt(RANDOM, 3, 7) : 0;
+        if (this.materialProperties.getOreType() != null) {
+            int exp = this.materialProperties.getOreType().blockType.getExp(RANDOM);
             return silktouch == 0 ? exp : 0;
         }
         return 0;

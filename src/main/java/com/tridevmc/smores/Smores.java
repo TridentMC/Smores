@@ -1,45 +1,43 @@
 package com.tridevmc.smores;
 
 import com.tridevmc.smores.client.CommonProxy;
-import com.tridevmc.smores.client.FogColorizer;
+import com.tridevmc.smores.client.color.FogColorizer;
 import com.tridevmc.smores.event.MaterialRegistrationEvent;
-import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.init.*;
 import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.world.BiomeFixer;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.ForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Smores.MODID)
-public class Smores
-{
+public class Smores {
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MODID = "smores";
     public static final ResourceLocation MATERIAL_REGISTRY_NAME = new ResourceLocation(Smores.MODID, "materials");
     public static final SmoresItemGroup SMORES_ITEM_GROUP = new SmoresItemGroup();
-    public static final CommonProxy PROXY = DistExecutor.safeRunForDist(()->com.tridevmc.smores.client.ClientProxy::new, ()->CommonProxy::new);
+    public static final CommonProxy PROXY = DistExecutor.safeRunForDist(() -> com.tridevmc.smores.client.ClientProxy::new, () -> CommonProxy::new);
+
     public Smores() {
         FMLJavaModLoadingContext.get().getModEventBus().register(PROXY);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -69,7 +67,6 @@ public class Smores
     }
 
     private void loadComplete(final FMLLoadCompleteEvent event) {
-        BiomeFixer.insertFeatures();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -78,9 +75,14 @@ public class Smores
 
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onBiomeLoading(BiomeLoadingEvent evt) {
+        BiomeFixer.onBiomeLoading(evt);
+    }
+
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
 
         @SubscribeEvent
@@ -113,7 +115,7 @@ public class Smores
                     .setType(Material.class)
                     .create();
             ModLoader.get().postEvent(new MaterialRegistrationEvent(mat));
-            ((ForgeRegistry)mat).freeze();
+            ((ForgeRegistry) mat).freeze();
         }
 
     }

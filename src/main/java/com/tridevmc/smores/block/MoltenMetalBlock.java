@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockReader;
 
 import java.util.function.Supplier;
 
-import static net.minecraft.block.material.Material.*;
+import static net.minecraft.block.material.Material.LAVA;
 
 public class MoltenMetalBlock extends FlowingFluidBlock {
     public final MaterialProperties materialProperties;

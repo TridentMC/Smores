@@ -11,5 +11,4 @@ public class MaterialRegistrationEvent extends Event implements IModBusEvent {
     public MaterialRegistrationEvent(IForgeRegistry<Material> registry) {
         this.registry = registry;
     }
-
 }

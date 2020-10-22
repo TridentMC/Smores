@@ -4,17 +4,10 @@ import com.tridevmc.smores.Smores;
 import com.tridevmc.smores.block.IngotBlock;
 import com.tridevmc.smores.block.MoltenMetalBlock;
 import com.tridevmc.smores.block.OreBlock;
-import com.tridevmc.smores.color.MaterialBlockColorizer;
-import com.tridevmc.smores.color.MaterialBlockItemColorizer;
-import com.tridevmc.smores.color.MoltenMetalBlockColorizer;
 import com.tridevmc.smores.fluid.MoltenMetalFluid;
 import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -65,13 +58,13 @@ public class BlocksInit {
             registry.register(b);
         }
         MaterialProperties.BlockProperties oreType = matProp.getOreType();
-        if(oreType != null) {
+        if (oreType != null) {
             Block b = new OreBlock(mat);
             ORES.put(mat, b);
             registry.register(b);
         }
         boolean molten = matProp.hasFluid();
-        if(molten) {
+        if (molten) {
             Block b = new MoltenMetalBlock(mat, () -> new MoltenMetalFluid.Source(mat));
             MOLTEN.put(mat, b);
             registry.register(b);
@@ -79,19 +72,19 @@ public class BlocksInit {
     }
 
     private static void registerMaterialItemBlocks(Material mat, IForgeRegistry<Item> registry) {
-        if(BLOCKS.containsKey(mat)) {
+        if (BLOCKS.containsKey(mat)) {
             Block b = BLOCKS.get(mat);
             ResourceLocation name = b.getRegistryName();
-            BlockItem bi = (BlockItem)new BlockItem(b, new Item.Properties().group(Smores.SMORES_ITEM_GROUP))
+            BlockItem bi = (BlockItem) new BlockItem(b, new Item.Properties().group(Smores.SMORES_ITEM_GROUP))
                     .setRegistryName(b.getRegistryName());
             BLOCK_ITEMS.put(mat, bi);
             registry.register(bi);
         }
 
-        if(ORES.containsKey(mat)) {
+        if (ORES.containsKey(mat)) {
             Block b = ORES.get(mat);
             ResourceLocation name = b.getRegistryName();
-            BlockItem bi = (BlockItem)new BlockItem(b, new Item.Properties().group(Smores.SMORES_ITEM_GROUP))
+            BlockItem bi = (BlockItem) new BlockItem(b, new Item.Properties().group(Smores.SMORES_ITEM_GROUP))
                     .setRegistryName(b.getRegistryName());
             ORE_ITEMS.put(mat, bi);
             registry.register(bi);

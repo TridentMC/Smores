@@ -10,7 +10,7 @@ public class IngotItem extends MaterialItem {
 
     public static String getSuffix(Material material) {
         MaterialProperties props = material.getProperties();
-        switch(props.getIngotType()) {
+        switch (props.getIngotType()) {
             case INGOT:
                 return "_ingot";
             case GEM:

@@ -16,8 +16,6 @@ public class IngotBlock extends MaterialBlock {
                 .sound(SoundType.METAL)
                 .hardnessAndResistance(properties.hardness, properties.resistance)
                 .harvestTool(ToolType.PICKAXE)
-                .harvestLevel((properties.blockType == MaterialProperties.BlockType.METAL_PRECIOUS
-                                || properties.blockType == MaterialProperties.BlockType.GEM) ? 2 :
-                                properties.blockType == MaterialProperties.BlockType.METAL_UTILITY ? 1 : 0);
+                .harvestLevel(properties.blockType.getToolLevel());
     }
 }

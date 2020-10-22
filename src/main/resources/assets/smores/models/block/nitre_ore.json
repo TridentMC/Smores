@@ -1,4 +1,4 @@
-{    
+{
   "parent": "smores:block/ore_base",
   "textures": {
       "particle": "block/netherrack",

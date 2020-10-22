@@ -34,7 +34,7 @@ public class FluidsInit {
 
     private static void registerMaterialFluids(Material mat, IForgeRegistry<Fluid> registry) {
         boolean molten = mat.getProperties().hasFluid();
-        if(molten) {
+        if (molten) {
             Fluid still = new MoltenMetalFluid.Source(mat).setRegistryName(mat.getRegistryName().getNamespace(), mat.getRegistryName().getPath() + "_molten_still");
             MOLTEN_STILL.put(mat, still);
             registry.register(still);

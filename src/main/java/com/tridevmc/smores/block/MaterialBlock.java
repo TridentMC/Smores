@@ -4,7 +4,7 @@ import com.tridevmc.smores.material.Material;
 import com.tridevmc.smores.material.MaterialProperties;
 import net.minecraft.block.Block;
 
-public class MaterialBlock extends Block {
+public abstract class MaterialBlock extends Block {
     public final MaterialProperties materialProperties;
 
     public MaterialBlock(Material material, String suffix, Properties properties) {

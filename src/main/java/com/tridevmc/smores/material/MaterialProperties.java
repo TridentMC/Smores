@@ -1,5 +1,9 @@
 package com.tridevmc.smores.material;
 
+import net.minecraft.util.math.MathHelper;
+
+import java.util.Random;
+
 public class MaterialProperties {
     public enum MaterialType {
         ELEMENT,
@@ -15,18 +19,54 @@ public class MaterialProperties {
         GLOB
     }
 
-    public enum BlockType {
-        METAL_UTILITY,
-        METAL_PRECIOUS,
-        DUST,
-        GEM
+    private interface IBlockT {
+        int getToolLevel();
     }
 
-    public enum OreType {
-        DEFAULT,
-        PRECIOUS,
-        DUST,
-        GEM
+    public enum BlockType implements IBlockT {
+        METAL_UTILITY(1),
+        METAL_PRECIOUS(2),
+        DUST(0),
+        GEM(1);
+
+        private final int toolLevel;
+
+        BlockType(int toolLevel) {
+            this.toolLevel = toolLevel;
+        }
+
+        @Override
+        public int getToolLevel() {
+            return toolLevel;
+        }
+    }
+
+    public enum OreType implements IBlockT {
+        DEFAULT(1),
+        PRECIOUS(2),
+        DUST(2),
+        GEM(2);
+
+        private final int toolLevel;
+
+        OreType(int toolLevel) {
+            this.toolLevel = toolLevel;
+        }
+
+        public int getToolLevel() {
+            return toolLevel;
+        }
+
+        public int getExp(Random random) {
+            switch(this) {
+                case DUST:
+                    return MathHelper.nextInt(random, 2, 5);
+                case GEM:
+                    return MathHelper.nextInt(random, 3, 7);
+                default:
+                    return 0;
+            }
+        }
     }
 
     public enum Dimension {
@@ -35,7 +75,7 @@ public class MaterialProperties {
         THE_END
     }
 
-    public static class BlockProperties<T> {
+    public static class BlockProperties<T extends IBlockT> {
         public T blockType;
         public float hardness;
         public float resistance;
@@ -264,7 +304,9 @@ public class MaterialProperties {
         return blockType;
     }
 
-    public OreGenProperties getOreGen() {return oreGen;}
+    public OreGenProperties getOreGen() {
+        return oreGen;
+    }
 
     public IngotType getIngotType() {
         return ingotType;
